@@ -27,38 +27,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // Initial session check
-    const checkSession = async () => {
-      // Secret Admin Protocol Verify
-      const adminPin = localStorage.getItem("admin_pin");
-      if (adminPin !== "2633") {
-        router.push("/");
-        return;
-      }
+    // Standardized PIN-auth check
+    const checkAuth = () => {
+      const isAuth = localStorage.getItem("admin_auth") === "true";
+      
+      setAdminLoggedIn(isAuth);
 
-      const { data: { session } } = await supabase.auth.getSession();
-      setAdminLoggedIn(!!session);
-      if (!session && pathname !== "/admin/login") {
+      if (!isAuth && pathname !== "/admin/login") {
         router.push("/admin/login");
       }
     };
-    checkSession();
 
-    // Listen for auth state changes globally
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      const adminPin = localStorage.getItem("admin_pin");
-      if (adminPin !== "2633") {
-        router.push("/");
-        return;
-      }
+    checkAuth();
 
-      setAdminLoggedIn(!!session);
-      if (!session && pathname !== "/admin/login") {
-        router.push("/admin/login");
-      }
-    });
-
-    return () => subscription.unsubscribe();
+    // Re-check on every pathname change
   }, [pathname, router, setAdminLoggedIn]);
 
   if (pathname === "/admin/login") return <>{children}</>;
@@ -88,13 +70,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           ))}
         </nav>
         <div className="absolute bottom-0 left-0 right-0 p-3 border-t border-gray-800">
-          <button onClick={async () => { 
-              await supabase.auth.signOut();
+          <button onClick={() => { 
+              localStorage.removeItem("admin_auth");
               setAdminLoggedIn(false); 
-              router.push("/admin/login"); 
+              router.push("/"); 
             }}
-            className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg">
-            <LogOut className="w-5 h-5" /> Logout
+            className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">
+            <LogOut className="w-5 h-5" /> Logout Admin
           </button>
           <Link href="/" className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg mt-1">
             ← Back to Website

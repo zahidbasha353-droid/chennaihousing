@@ -36,7 +36,7 @@ export default function Header() {
   const handleAdminAuth = (e: React.FormEvent) => {
     e.preventDefault();
     if (pin === "2633") {
-      localStorage.setItem("admin_pin", "2633");
+      localStorage.setItem("admin_auth", "true");
       setShowPinModal(false);
       setPin("");
       setPinError("");
