@@ -5,14 +5,21 @@ import { useStore } from "@/store/useStore";
 import { Save, Loader2 } from "lucide-react";
 import ImageUploader from "@/components/ui/ImageUploader";
 
-const Field = ({ label, value, onChange, type = "text", rows }: { label: string; value: string; onChange: (v: string) => void; type?: string; rows?: number }) => (
+const InputRow = ({ label, id, type = "text", rows, value, onChange }: { 
+  label: string; 
+  id: string; 
+  type?: string; 
+  rows?: number;
+  value: string;
+  onChange: (id: string, val: string) => void;
+}) => (
   <div>
     <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
     {rows ? (
-      <textarea rows={rows} value={value || ""} onChange={(e) => onChange(e.target.value)}
+      <textarea rows={rows} value={value || ""} onChange={(e) => onChange(id, e.target.value)}
         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none" />
     ) : (
-      <input type={type} value={value || ""} onChange={(e) => onChange(e.target.value)}
+      <input type={type} value={value || ""} onChange={(e) => onChange(id, e.target.value)}
         className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" />
     )}
   </div>
@@ -78,6 +85,10 @@ export default function AdminSettingsPage() {
     { id: "whatsapp", label: "WhatsApp" },
   ];
 
+  const handleChange = (id: string, val: string) => {
+    setLocal(prev => ({ ...prev, [id]: val }));
+  };
+
   return (
     <form onSubmit={handleSave} className="pb-24 relative min-h-[calc(100vh-80px)]">
       <div className="flex items-center justify-between mb-6">
@@ -105,46 +116,46 @@ export default function AdminSettingsPage() {
               onUpload={(url) => setLocal(prev => ({ ...prev, logo_url: url }))}
               compact
             />
-            <Field label="Logo URL (or paste manually)" value={local.logo_url} onChange={(v) => setLocal({ ...local, logo_url: v })} />
-            <Field label="Site Title" value={local.site_title} onChange={(v) => setLocal({ ...local, site_title: v })} />
-            <Field label="Tagline" value={local.tagline} onChange={(v) => setLocal({ ...local, tagline: v })} />
-            <Field label="Phone" value={local.phone} onChange={(v) => setLocal({ ...local, phone: v })} />
-            <Field label="Email" value={local.email} onChange={(v) => setLocal({ ...local, email: v })} />
-            <Field label="Address" value={local.address} onChange={(v) => setLocal({ ...local, address: v })} rows={3} />
-            <Field label="Primary Color" value={local.primary_color} onChange={(v) => setLocal({ ...local, primary_color: v })} type="color" />
+            <InputRow label="Logo URL (or paste manually)" id="logo_url" value={local.logo_url} onChange={handleChange} />
+            <InputRow label="Site Title" id="site_title" value={local.site_title} onChange={handleChange} />
+            <InputRow label="Tagline" id="tagline" value={local.tagline} onChange={handleChange} />
+            <InputRow label="Phone" id="phone" value={local.phone} onChange={handleChange} />
+            <InputRow label="Email" id="email" value={local.email} onChange={handleChange} />
+            <InputRow label="Address" id="address" rows={3} value={local.address} onChange={handleChange} />
+            <InputRow label="Primary Color" id="primary_color" type="color" value={local.primary_color} onChange={handleChange} />
           </div>
         )}
 
         {tab === "hero" && (
           <div className="space-y-4 max-w-xl">
-            <Field label="Hero Heading" value={local.hero_heading} onChange={(v) => setLocal({ ...local, hero_heading: v })} />
-            <Field label="Hero Subheading" value={local.hero_subheading} onChange={(v) => setLocal({ ...local, hero_subheading: v })} />
+            <InputRow label="Hero Heading" id="hero_heading" value={local.hero_heading} onChange={handleChange} />
+            <InputRow label="Hero Subheading" id="hero_subheading" value={local.hero_subheading} onChange={handleChange} />
             <ImageUploader
               label="Hero Banner Image"
               currentUrl={local.hero_image}
               onUpload={(url) => setLocal(prev => ({ ...prev, hero_image: url }))}
             />
-            <Field label="Hero Image URL (or paste manually)" value={local.hero_image} onChange={(v) => setLocal({ ...local, hero_image: v })} />
+            <InputRow label="Hero Image URL (or paste manually)" id="hero_image" value={local.hero_image} onChange={handleChange} />
           </div>
         )}
 
         {tab === "seo" && (
           <div className="space-y-4 max-w-xl">
-            <Field label="Meta Title" value={local.meta_title} onChange={(v) => setLocal({ ...local, meta_title: v })} />
-            <Field label="Meta Description" value={local.meta_description} onChange={(v) => setLocal({ ...local, meta_description: v })} rows={3} />
+            <InputRow label="Meta Title" id="meta_title" value={local.meta_title} onChange={handleChange} />
+            <InputRow label="Meta Description" id="meta_description" rows={3} value={local.meta_description} onChange={handleChange} />
           </div>
         )}
 
         {tab === "ads" && (
           <div className="space-y-4 max-w-xl">
-            <Field label="Facebook Pixel ID" value={local.facebook_pixel} onChange={(v) => setLocal({ ...local, facebook_pixel: v })} />
-            <Field label="Google Analytics ID" value={local.google_analytics} onChange={(v) => setLocal({ ...local, google_analytics: v })} />
+            <InputRow label="Facebook Pixel ID" id="facebook_pixel" value={local.facebook_pixel} onChange={handleChange} />
+            <InputRow label="Google Analytics ID" id="google_analytics" value={local.google_analytics} onChange={handleChange} />
           </div>
         )}
 
         {tab === "whatsapp" && (
           <div className="space-y-4 max-w-xl">
-            <Field label="WhatsApp Number (with country code)" value={local.whatsapp} onChange={(v) => setLocal({ ...local, whatsapp: v })} />
+            <InputRow label="WhatsApp Number (with country code)" id="whatsapp" value={local.whatsapp} onChange={handleChange} />
           </div>
         )}
       </div>

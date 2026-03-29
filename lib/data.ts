@@ -231,22 +231,22 @@ export const DEMO_PROJECTS: Project[] = [
 ];
 
 export const DEMO_SETTINGS: SiteSettings = {
-  logo_url: "/logo.png",
-  favicon_url: "/favicon.ico",
-  site_title: "Chennai Housing",
-  tagline: "Your Dream Plot Awaits in Chennai",
-  phone: "+91 7550177369",
-  whatsapp: "917550177369",
-  email: "zahidbasha353@gmail.com",
-  address: "123, Anna Nagar Main Road, Avadi, Chennai - 600062",
-  hero_image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=800&fit=crop",
-  hero_heading: "Find Your Dream Plot in Chennai",
-  hero_subheading: "DTCP Approved Plots in Avadi & Chennai Starting from ₹9 Lakh*",
+  logo_url: "",
+  favicon_url: "",
+  site_title: "",
+  tagline: "",
+  phone: "",
+  whatsapp: "",
+  email: "",
+  address: "",
+  hero_image: "",
+  hero_heading: "",
+  hero_subheading: "",
   primary_color: "#E53935",
   facebook_pixel: "",
   google_analytics: "",
-  meta_title: "Chennai Housing - Premium Plots in Avadi & Chennai",
-  meta_description: "Find DTCP approved plots and residential properties in Avadi, Chennai. Best prices, legal verification, and easy EMI options.",
+  meta_title: "",
+  meta_description: "",
 };
 
 export const TESTIMONIALS = [
