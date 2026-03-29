@@ -1,52 +1,91 @@
 "use client";
 
-import { useState, use } from "react";
+import { useState, use, useEffect, useCallback } from "react";
 import Link from "next/link";
 import {
   MapPin, Phone, Heart, Share2, ChevronLeft, ChevronRight as ChevronRightIcon,
   Shield, CheckCircle, Calculator, Download, Navigation,
-  School, Building2, TrainFront, Landmark as LandmarkIcon, Loader2,
+  School, Building2, TrainFront, Landmark as LandmarkIcon, AlertCircle, RefreshCcw
 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { formatPrice } from "@/lib/i18n";
+import YouTubeEmbed from "@/components/ui/YouTubeEmbed";
 import { LeadForm } from "@/components/leads/LeadForm";
 import PropertyCard from "@/components/ui/PropertyCard";
-import YouTubeEmbed from "@/components/ui/YouTubeEmbed";
+import { getProjectBySlugWithTimeout } from "@/lib/api";
+import { Project } from "@/lib/types";
+import ProjectDetailSkeleton from "@/components/projects/ProjectDetailSkeleton";
 import Image from "next/image";
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
-  const { projects, favorites, toggleFavorite, settings, fetchProjects } = useStore();
+  const { projects, favorites, toggleFavorite, settings } = useStore();
   
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [currentImage, setCurrentImage] = useState(0);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [emiAmount, setEmiAmount] = useState(2000000);
   const [emiTenure, setEmiTenure] = useState(20);
   const emiRate = 8.5;
 
-  const project = projects.find((p) => p.slug === slug);
+  const loadProject = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    console.log("DEBUG: Loading slug ->", slug);
+    
+    try {
+      const data = await getProjectBySlugWithTimeout(slug);
+      console.log("DEBUG: Data received ->", data);
+      
+      if (!data) {
+        setError("Project not found");
+      } else {
+        setProject(data);
+      }
+    } catch (err: any) {
+      console.error("DEBUG: Fetch Error ->", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }, [slug]);
 
-  if (projects.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="w-10 h-10 text-primary animate-spin mx-auto mb-4" />
-          <p className="text-gray-500">Loading project details...</p>
-        </div>
-      </div>
-    );
+  useEffect(() => {
+    loadProject();
+  }, [loadProject]);
+
+  if (loading) {
+    return <ProjectDetailSkeleton />;
   }
 
-  if (!project) {
+  if (error || !project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center p-8 bg-white rounded-2xl shadow-xl max-w-md w-full mx-4">
-          <p className="text-6xl mb-4">🏡</p>
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Project Not Found</h2>
-          <p className="text-gray-500 mb-6">The project you are looking for doesn&apos;t exist or has been moved.</p>
-          <Link href="/projects" className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors">
-            Browse all projects
-          </Link>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center p-10 bg-white rounded-3xl shadow-xl max-w-md w-full animate-in fade-in zoom-in duration-300">
+          <div className="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+            <AlertCircle className="w-10 h-10 text-red-500" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">
+            {error === "Project not found" ? "Project Not Found" : "Connection Error"}
+          </h2>
+          <p className="text-gray-500 mb-8 leading-relaxed">
+            {error === "Project not found" 
+              ? "The project you are looking for doesn't exist or has been moved."
+              : "We're having trouble connecting to the database. Please check your internet or try again."}
+          </p>
+          <div className="flex flex-col gap-3">
+            <button 
+              onClick={() => loadProject()}
+              className="flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-all active:scale-95 shadow-lg shadow-primary/20"
+            >
+              <RefreshCcw className="w-5 h-5" /> Retry Loading
+            </button>
+            <Link href="/projects" className="px-6 py-3.5 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all">
+              Browse All Projects
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -59,7 +98,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
   const months = emiTenure * 12;
   const emi = Math.round((emiAmount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1));
 
-  const similarProjects = projects.filter((p) => p.id !== project.id && p.city === project.city).slice(0, 3);
+  const similarProjects = projects.filter((p: Project) => p.id !== project.id && p.city === project.city).slice(0, 3);
 
   const nearbyIcons: Record<string, typeof School> = {
     school: School,

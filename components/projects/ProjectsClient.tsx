@@ -36,9 +36,18 @@ export default function ProjectsClient() {
   const [sortBy, setSortBy] = useState("latest");
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 600);
+    // Safety timeout: stop loading after 5 seconds regardless of sync status
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 5000);
+
+    // If projects are already loaded, stop loading immediately
+    if (projects.length > 0) {
+      setIsLoading(false);
+    }
+
     return () => clearTimeout(timer);
-  }, []);
+  }, [projects.length]);
 
   // Sync URL ?q= param when searchQuery changes
   useEffect(() => {
