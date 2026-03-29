@@ -6,6 +6,6 @@ export const metadata: Metadata = {
   description: "Find your dream plot in Chennai today.",
 };
 
-export default function HomePage() {
+export default function Page() {
   return <HomeClient />;
 }
