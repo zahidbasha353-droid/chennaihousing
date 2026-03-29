@@ -424,7 +424,7 @@ export default function ProjectsClient() {
           {/* Project Grid */}
           <div className="flex-1 min-h-[600px]">
             {isLoading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[...Array(6)].map((_, i) => (
                   <SkeletonCard key={i} />
                 ))}
@@ -443,7 +443,7 @@ export default function ProjectsClient() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 animate-fadeIn">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fadeIn">
                 {filteredProjects.map((project) => (
                   <PropertyCard key={project.id} project={project} />
                 ))}

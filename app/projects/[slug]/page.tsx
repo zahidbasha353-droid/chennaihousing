@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   MapPin, Phone, Heart, Share2, ChevronLeft, ChevronRight as ChevronRightIcon,
   Shield, CheckCircle, Calculator, Download, Navigation,
-  School, Building2, TrainFront, Landmark as LandmarkIcon,
+  School, Building2, TrainFront, Landmark as LandmarkIcon, Loader2,
 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { formatPrice } from "@/lib/i18n";
@@ -16,22 +16,37 @@ import Image from "next/image";
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
-  const { projects, favorites, toggleFavorite, settings } = useStore();
-  const project = projects.find((p) => p.slug === slug);
-
+  const { projects, favorites, toggleFavorite, settings, fetchProjects } = useStore();
+  
   const [currentImage, setCurrentImage] = useState(0);
   const [showLeadForm, setShowLeadForm] = useState(false);
   const [emiAmount, setEmiAmount] = useState(2000000);
   const [emiTenure, setEmiTenure] = useState(20);
   const emiRate = 8.5;
 
-  if (!project) {
+  const project = projects.find((p) => p.slug === slug);
+
+  if (projects.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
+          <Loader2 className="w-10 h-10 text-primary animate-spin mx-auto mb-4" />
+          <p className="text-gray-500">Loading project details...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!project) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center p-8 bg-white rounded-2xl shadow-xl max-w-md w-full mx-4">
           <p className="text-6xl mb-4">🏡</p>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Project Not Found</h2>
-          <Link href="/projects" className="text-primary hover:underline">Browse all projects</Link>
+          <p className="text-gray-500 mb-6">The project you are looking for doesn&apos;t exist or has been moved.</p>
+          <Link href="/projects" className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-colors">
+            Browse all projects
+          </Link>
         </div>
       </div>
     );

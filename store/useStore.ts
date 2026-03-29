@@ -66,9 +66,13 @@ export const useStore = create<AppState>((set) => ({
         const data = await api.getProjects();
         if (data && data.length > 0) {
           set({ projects: data });
+        } else {
+          // If Supabase is empty, we still have projects: [] which will trigger fallbacks in UI
+          set({ projects: [] });
         }
       } catch (err) {
         console.error("Error fetching projects:", err);
+        useStore.getState().addToast("Failed to sync projects from database", "error");
       }
     }
   },
@@ -79,28 +83,34 @@ export const useStore = create<AppState>((set) => ({
     }
     try {
       const data = await api.addProject(project);
-      // Successfully inserted — add to local state
       set((state) => ({ projects: [data, ...state.projects] }));
     } catch (err: any) {
-      // Re-throw real error from api.ts so UI can display it
       throw err;
     }
   },
   updateProject: async (id, data) => {
-    // optimistic
     set((state) => ({
       projects: state.projects.map((p) => (p.id === id ? { ...p, ...data } : p)),
     }));
     if (!isSupabaseConfigured()) return;
-    const { error } = await supabase.from("projects").update(data).eq("id", id);
-    if (error) console.error("Error updating project:", error);
+    try {
+      const { error } = await supabase.from("projects").update(data).eq("id", id);
+      if (error) throw error;
+    } catch (err) {
+      console.error("Error updating project:", err);
+      useStore.getState().addToast("Failed to save project changes", "error");
+    }
   },
   deleteProject: async (id) => {
-    // optimistic
     set((state) => ({ projects: state.projects.filter((p) => p.id !== id) }));
     if (!isSupabaseConfigured()) return;
-    const { error } = await supabase.from("projects").delete().eq("id", id);
-    if (error) console.error("Error deleting project:", error);
+    try {
+      const { error } = await supabase.from("projects").delete().eq("id", id);
+      if (error) throw error;
+    } catch (err) {
+      console.error("Error deleting project:", err);
+      useStore.getState().addToast("Failed to delete project", "error");
+    }
   },
 
   // Favorites
@@ -139,6 +149,7 @@ export const useStore = create<AppState>((set) => ({
         }
       } catch (err) {
         console.error("Error fetching settings:", err);
+        useStore.getState().addToast("Failed to sync settings from database", "error");
       }
     }
   },
@@ -153,6 +164,7 @@ export const useStore = create<AppState>((set) => ({
         await api.updateSettings(currentState);
       } catch (err) {
         console.error("Error saving settings to Supabase:", err);
+        useStore.getState().addToast("Failed to save settings to database", "error");
       }
     }
   },
