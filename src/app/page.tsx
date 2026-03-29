@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HomeClient />;
+  return (
+    <div>
+      <h1>Website Working 🔥</h1>
+    </div>
+  );
 }
