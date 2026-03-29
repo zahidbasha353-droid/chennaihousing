@@ -6,34 +6,904 @@
 - Environments: .env.local
 
   Creating an optimized production build ...
-✓ Compiled successfully in 7.8s
-  Running TypeScript ...
-  Finished TypeScript in 9.2s ...
-  Collecting page data using 11 workers ...
-  Generating static pages using 11 workers (0/15) ...
-  Generating static pages using 11 workers (3/15) 
-  Generating static pages using 11 workers (7/15) 
-  Generating static pages using 11 workers (11/15) 
-✓ Generating static pages using 11 workers (15/15) in 1305ms
-  Finalizing page optimization ...
 
-Route (app)
-┌ ○ /
-├ ○ /_not-found
-├ ○ /about
-├ ○ /admin
-├ ○ /admin/feedback
-├ ○ /admin/leads
-├ ○ /admin/login
-├ ○ /admin/media
-├ ○ /admin/projects
-├ ○ /admin/settings
-├ ○ /book-visit
-├ ○ /contact
-├ ○ /projects
-└ ƒ /projects/[slug]
+> Build error occurred
+Error: Turbopack build failed with 34 errors:
+./src/components/HomeClient.tsx:9:1
+Module not found: Can't resolve '@/lib/data'
+  [90m 7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m 8 |[0m [36mimport[0m { t, formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+[31m[1m>[0m [90m 9 |[0m [36mimport[0m { [33mTESTIMONIALS[0m } [36mfrom[0m [32m"@/lib/data"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m10 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+  [90m11 |[0m [36mimport[0m { [33mCallbackWidget[0m } [36mfrom[0m [32m"@/components/leads/CallbackWidget"[0m;
+  [90m12 |[0m
+
+Import map: aliased to relative './src/lib/data' inside of [project]/
 
 
-○  (Static)   prerendered as static content
-ƒ  (Dynamic)  server-rendered on demand
+Import trace:
+  Server Component:
+    ./src/components/HomeClient.tsx
+    ./app/page.tsx
 
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/about/page.tsx:4:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAboutPage[0m() {
+  [90m7 |[0m   [36mconst[0m { language } = useStore();
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/about/page.tsx [Client Component Browser]
+    ./app/about/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/about/page.tsx [Client Component SSR]
+    ./app/about/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/projects/page.tsx:11:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 9 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m [33mConfirmDialog[0m [36mfrom[0m [32m"@/components/ui/ConfirmDialog"[0m;
+  [90m13 |[0m [36mimport[0m [33mImageUploader[0m [36mfrom[0m [32m"@/components/ui/ImageUploader"[0m;
+  [90m14 |[0m
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/projects/page.tsx [Client Component Browser]
+    ./app/admin/projects/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/projects/page.tsx [Client Component SSR]
+    ./app/admin/projects/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/contact/page.tsx:6:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m4 |[0m [36mimport[0m { [33mMapPin[0m, [33mPhone[0m, [33mMail[0m, [33mClock[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mContactPage[0m() {
+  [90m9 |[0m   [36mconst[0m { language, settings } = useStore();
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/contact/page.tsx [Client Component Browser]
+    ./app/contact/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/contact/page.tsx [Client Component SSR]
+    ./app/contact/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/projects/[slug]/page.tsx:11:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 9 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m11 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m12 |[0m [36mimport[0m { [33mLeadForm[0m } [36mfrom[0m [32m"@/components/leads/LeadForm"[0m;
+  [90m13 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+  [90m14 |[0m
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/projects/[slug]/page.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/projects/[slug]/page.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/HomeClient.tsx:8:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 6 |[0m [36mimport[0m { [33mSearch[0m, [33mShield[0m, [33mFileCheck[0m, [33mLandmark[0m, [33mScale[0m, [33mStar[0m, [33mChevronRight[0m, [33mPhone[0m, [33mMapPin[0m, [33mAr...[0m
+  [90m 7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { t, formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m [36mimport[0m { [33mTESTIMONIALS[0m } [36mfrom[0m [32m"@/lib/data"[0m;
+  [90m10 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+  [90m11 |[0m [36mimport[0m { [33mCallbackWidget[0m } [36mfrom[0m [32m"@/components/leads/CallbackWidget"[0m;
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/HomeClient.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Footer.tsx:6:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m4 |[0m [36mimport[0m { [33mMapPin[0m, [33mPhone[0m, [33mMail[0m, [33mArrowUp[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+  [90m9 |[0m   [36mconst[0m { language, settings } = useStore();
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Footer.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Header.tsx:7:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 5 |[0m [36mimport[0m { [33mMenu[0m, [33mX[0m, [33mPhone[0m, [33mGlobe[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m 6 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHeader[0m() {
+  [90m10 |[0m   [36mconst[0m [scrolled, setScrolled] = useState([36mfalse[0m);
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Header.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/projects/ProjectsClient.tsx:7:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 5 |[0m [36mimport[0m { [33mSearch[0m, [33mSlidersHorizontal[0m, [33mX[0m, [33mChevronDown[0m, [33mMapPin[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m 6 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { t, formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+  [90m 9 |[0m [36mimport[0m [33mSkeletonCard[0m [36mfrom[0m [32m"@/components/ui/SkeletonCard"[0m;
+  [90m10 |[0m
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/projects/ProjectsClient.tsx
+    ./app/projects/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/PropertyCard.tsx:7:1
+Module not found: Can't resolve '@/lib/i18n'
+  [90m 5 |[0m [36mimport[0m { [33mMapPin[0m, [33mHeart[0m, [33mArrowRight[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m 6 |[0m [36mimport[0m { [33mProject[0m } [36mfrom[0m [32m"@/lib/types"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m 9 |[0m
+  [90m10 |[0m [36minterface[0m [33mPropertyCardProps[0m {
+
+Import map: aliased to relative './src/lib/i18n' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/PropertyCard.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/PropertyCard.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/layout.tsx:12:1
+Module not found: Can't resolve '@/lib/supabase'
+  [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m11 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m12 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m"@/lib/supabase"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m
+  [90m14 |[0m [36mconst[0m sidebarLinks = [
+  [90m15 |[0m   { href: [32m"/admin"[0m, label: [32m"Dashboard"[0m, icon: [33mLayoutDashboard[0m },
+
+Import map: aliased to relative './src/lib/supabase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/layout.tsx [Client Component Browser]
+    ./app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/layout.tsx [Client Component SSR]
+    ./app/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/login/page.tsx:6:1
+Module not found: Can't resolve '@/lib/supabase'
+  [90m4 |[0m [36mimport[0m { useRouter } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m5 |[0m [36mimport[0m { [33mLock[0m, [33mMail[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m"@/lib/supabase"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m8 |[0m
+  [90m9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAdminLoginPage[0m() {
+
+Import map: aliased to relative './src/lib/supabase' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/login/page.tsx [Client Component Browser]
+    ./app/admin/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/login/page.tsx [Client Component SSR]
+    ./app/admin/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/ImageUploader.tsx:6:1
+Module not found: Can't resolve '@/lib/upload'
+  [90m4 |[0m [36mimport[0m { useDropzone } [36mfrom[0m [32m"react-dropzone"[0m;
+  [90m5 |[0m [36mimport[0m { [33mUpload[0m, [33mX[0m, [33mLoader2[0m, [33mCheckCircle[0m, [33mImage[0m [36mas[0m [33mImageIcon[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { uploadImage } [36mfrom[0m [32m"@/lib/upload"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36minterface[0m [33mImageUploaderProps[0m {
+  [90m9 |[0m   label?: string;
+
+Import map: aliased to relative './src/lib/upload' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/ImageUploader.tsx [Client Component Browser]
+    ./app/admin/settings/page.tsx [Client Component Browser]
+    ./app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/ImageUploader.tsx [Client Component SSR]
+    ./app/admin/settings/page.tsx [Client Component SSR]
+    ./app/admin/settings/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/about/page.tsx:3:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAboutPage[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/about/page.tsx [Client Component Browser]
+    ./app/about/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/about/page.tsx [Client Component SSR]
+    ./app/about/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/feedback/page.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mMessageSquare[0m, [33mLoader2[0m, [33mSave[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAdminFeedbackPage[0m() {
+  [90m8 |[0m   [36mconst[0m { addToast } = useStore();
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/feedback/page.tsx [Client Component Browser]
+    ./app/admin/feedback/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/feedback/page.tsx [Client Component SSR]
+    ./app/admin/feedback/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/layout.tsx:10:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 8 |[0m   [33mImage[0m [36mas[0m [33mImageIcon[0m, [33mLogOut[0m, [33mMenu[0m, [33mX[0m, [33mMessageSquare[0m
+  [90m 9 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m12 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m"@/lib/supabase"[0m;
+  [90m13 |[0m
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/layout.tsx [Client Component Browser]
+    ./app/admin/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/layout.tsx [Client Component SSR]
+    ./app/admin/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/login/page.tsx:7:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 5 |[0m [36mimport[0m { [33mLock[0m, [33mMail[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m 6 |[0m [36mimport[0m { supabase } [36mfrom[0m [32m"@/lib/supabase"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAdminLoginPage[0m() {
+  [90m10 |[0m   [36mconst[0m [email, setEmail] = useState([32m""[0m);
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/login/page.tsx [Client Component Browser]
+    ./app/admin/login/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/login/page.tsx [Client Component SSR]
+    ./app/admin/login/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/media/page.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState, useCallback } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mUpload[0m, [33mLink[0m [36mas[0m [33mLinkIcon[0m, [33mImage[0m [36mas[0m [33mImageIcon[0m, [33mTrash2[0m, [33mLoader2[0m, [33mCheckCircle[0m, [33mCopy[0m }.[36m..[0m
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m [33mImageUploader[0m [36mfrom[0m [32m"@/components/ui/ImageUploader"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAdminMediaPage[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/media/page.tsx [Client Component Browser]
+    ./app/admin/media/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/media/page.tsx [Client Component SSR]
+    ./app/admin/media/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/page.tsx:3:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m1 |[0m [32m"use client"[0m;
+  [90m2 |[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { [33mUsers[0m, [33mFolderKanban[0m, [33mEye[0m, [33mTrendingUp[0m, [33mArrowUpRight[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mAdminDashboard[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/page.tsx [Client Component Browser]
+    ./app/admin/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/page.tsx [Client Component SSR]
+    ./app/admin/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/projects/page.tsx:10:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 8 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m 9 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m12 |[0m [36mimport[0m [33mConfirmDialog[0m [36mfrom[0m [32m"@/components/ui/ConfirmDialog"[0m;
+  [90m13 |[0m [36mimport[0m [33mImageUploader[0m [36mfrom[0m [32m"@/components/ui/ImageUploader"[0m;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/projects/page.tsx [Client Component Browser]
+    ./app/admin/projects/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/projects/page.tsx [Client Component SSR]
+    ./app/admin/projects/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/admin/settings/page.tsx:4:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { useState, useEffect } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mSave[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+  [90m6 |[0m [36mimport[0m [33mImageUploader[0m [36mfrom[0m [32m"@/components/ui/ImageUploader"[0m;
+  [90m7 |[0m
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/settings/page.tsx [Client Component Browser]
+    ./app/admin/settings/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/settings/page.tsx [Client Component SSR]
+    ./app/admin/settings/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/book-visit/page.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mCalendar[0m, [33mClock[0m, [33mUser[0m, [33mPhone[0m, [33mMail[0m, [33mMapPin[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mBookVisitPage[0m() {
+  [90m8 |[0m   [36mconst[0m { projects } = useStore();
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/book-visit/page.tsx [Client Component Browser]
+    ./app/book-visit/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/book-visit/page.tsx [Client Component SSR]
+    ./app/book-visit/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/contact/page.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mMapPin[0m, [33mPhone[0m, [33mMail[0m, [33mClock[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mContactPage[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/contact/page.tsx [Client Component Browser]
+    ./app/contact/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/contact/page.tsx [Client Component SSR]
+    ./app/contact/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./app/projects/[slug]/page.tsx:10:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 8 |[0m   [33mSchool[0m, [33mBuilding2[0m, [33mTrainFront[0m, [33mLandmark[0m [36mas[0m [33mLandmarkIcon[0m,
+  [90m 9 |[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m10 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m11 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m12 |[0m [36mimport[0m { [33mLeadForm[0m } [36mfrom[0m [32m"@/components/leads/LeadForm"[0m;
+  [90m13 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/projects/[slug]/page.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/projects/[slug]/page.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ClientProviders.tsx:7:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 5 |[0m [36mimport[0m { [33mExitIntentPopup[0m } [36mfrom[0m [32m"@/components/leads/ExitIntentPopup"[0m;
+  [90m 6 |[0m [36mimport[0m { [33mWhatsAppButton[0m } [36mfrom[0m [32m"@/components/leads/WhatsAppButton"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mClientProviders[0m({ children }: { children: [33mReact[0m.[33mReactNode[0m }) {
+  [90m10 |[0m   [36mconst[0m { fetchSettings, fetchProjects } = useStore();
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/ClientProviders.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/HomeClient.tsx:7:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 5 |[0m [36mimport[0m { useRouter } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m 6 |[0m [36mimport[0m { [33mSearch[0m, [33mShield[0m, [33mFileCheck[0m, [33mLandmark[0m, [33mScale[0m, [33mStar[0m, [33mChevronRight[0m, [33mPhone[0m, [33mMapPin[0m, [33mAr...[0m
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m { t, formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m 9 |[0m [36mimport[0m { [33mTESTIMONIALS[0m } [36mfrom[0m [32m"@/lib/data"[0m;
+  [90m10 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/HomeClient.tsx
+    ./app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Footer.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m4 |[0m [36mimport[0m { [33mMapPin[0m, [33mPhone[0m, [33mMail[0m, [33mArrowUp[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mFooter[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Footer.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/layout/Header.tsx:6:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m4 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+  [90m5 |[0m [36mimport[0m { [33mMenu[0m, [33mX[0m, [33mPhone[0m, [33mGlobe[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { t } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m8 |[0m
+  [90m9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHeader[0m() {
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/layout/Header.tsx
+    ./app/layout.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/leads/CallbackWidget.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mPhone[0m, [33mUser[0m, [33mLoader2[0m, [33mX[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mfunction[0m [33mCallbackWidget[0m() {
+  [90m8 |[0m   [36mconst[0m [isOpen, setIsOpen] = useState([36mfalse[0m);
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/leads/CallbackWidget.tsx [Client Component Browser]
+    ./src/components/HomeClient.tsx [Client Component Browser]
+    ./src/components/HomeClient.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/leads/CallbackWidget.tsx [Client Component SSR]
+    ./src/components/HomeClient.tsx [Client Component SSR]
+    ./src/components/HomeClient.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/leads/LeadForm.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mX[0m, [33mPhone[0m, [33mUser[0m, [33mMail[0m, [33mMessageSquare[0m, [33mLoader2[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36minterface[0m [33mLeadFormProps[0m {
+  [90m8 |[0m   projectId?: string;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/leads/LeadForm.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/leads/LeadForm.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/leads/WhatsAppButton.tsx:4:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m2 |[0m
+  [90m3 |[0m [36mimport[0m { [33mMessageCircle[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m
+  [90m6 |[0m [36mexport[0m [36mfunction[0m [33mWhatsAppButton[0m() {
+  [90m7 |[0m   [36mconst[0m { settings } = useStore();
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/leads/WhatsAppButton.tsx [Client Component Browser]
+    ./src/components/ClientProviders.tsx [Client Component Browser]
+    ./src/components/ClientProviders.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/leads/WhatsAppButton.tsx [Client Component SSR]
+    ./src/components/ClientProviders.tsx [Client Component SSR]
+    ./src/components/ClientProviders.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/projects/ProjectsClient.tsx:6:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m4 |[0m [36mimport[0m { useSearchParams, useRouter } [36mfrom[0m [32m"next/navigation"[0m;
+  [90m5 |[0m [36mimport[0m { [33mSearch[0m, [33mSlidersHorizontal[0m, [33mX[0m, [33mChevronDown[0m, [33mMapPin[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m { t, formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+  [90m8 |[0m [36mimport[0m [33mPropertyCard[0m [36mfrom[0m [32m"@/components/ui/PropertyCard"[0m;
+  [90m9 |[0m [36mimport[0m [33mSkeletonCard[0m [36mfrom[0m [32m"@/components/ui/SkeletonCard"[0m;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/projects/ProjectsClient.tsx
+    ./app/projects/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/PropertyCard.tsx:8:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m 6 |[0m [36mimport[0m { [33mProject[0m } [36mfrom[0m [32m"@/lib/types"[0m;
+  [90m 7 |[0m [36mimport[0m { formatPrice } [36mfrom[0m [32m"@/lib/i18n"[0m;
+[31m[1m>[0m [90m 8 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m
+  [90m10 |[0m [36minterface[0m [33mPropertyCardProps[0m {
+  [90m11 |[0m   project: [33mProject[0m;
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/PropertyCard.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Client Component Browser]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/PropertyCard.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Client Component SSR]
+    ./app/projects/[slug]/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./src/components/ui/Toast.tsx:5:1
+Module not found: Can't resolve '@/store/useStore'
+  [90m3 |[0m [36mimport[0m { useEffect } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m { [33mCheckCircle[0m, [33mXCircle[0m, [33mInfo[0m, [33mX[0m } [36mfrom[0m [32m"lucide-react"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { useStore } [36mfrom[0m [32m"@/store/useStore"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mToast[0m() {
+  [90m8 |[0m   [36mconst[0m { toasts, removeToast } = useStore();
+
+Import map: aliased to relative './src/store/useStore' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/ui/Toast.tsx [Client Component Browser]
+    ./src/components/ClientProviders.tsx [Client Component Browser]
+    ./src/components/ClientProviders.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/ui/Toast.tsx [Client Component SSR]
+    ./src/components/ClientProviders.tsx [Client Component SSR]
+    ./src/components/ClientProviders.tsx [Server Component]
+    ./app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (./src/components/HomeClient.tsx:9:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/about/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/projects/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/contact/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/projects/[slug]/page.tsx:11:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/HomeClient.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Footer.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Header.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/projects/ProjectsClient.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/PropertyCard.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/layout.tsx:12:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/login/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/ImageUploader.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/about/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/feedback/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/layout.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/login/page.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/media/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/page.tsx:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/projects/page.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/admin/settings/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/book-visit/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/contact/page.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./app/projects/[slug]/page.tsx:10:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ClientProviders.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/HomeClient.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Footer.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/layout/Header.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/leads/CallbackWidget.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/leads/LeadForm.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/leads/WhatsAppButton.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/projects/ProjectsClient.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/PropertyCard.tsx:8:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./src/components/ui/Toast.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

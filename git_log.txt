@@ -1,0 +1,10 @@
+bdba69a safe fix: moved src/app to app
+21b31e0 Move App to root
+3218f6f remove HomeClient import fix
+6690552 test layout fix
+5b7ff45 Fix homepage routing configuration and default exports
+c4bbeb8 final fix homepage
+15b6011 Fix Vercel 404 issue on App Router
+c7478a1  Fix project page suspense and verify TS
+6316ef8  Fix TypeScript errors
+bfca130 initial commit
