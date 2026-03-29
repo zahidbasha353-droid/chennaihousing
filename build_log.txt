@@ -1,0 +1,27 @@
+
+> chennaihousing.in@0.1.0 build
+> next build
+
+▲ Next.js 16.2.1 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 6.2s
+  Running TypeScript ...
+  Finished TypeScript in 8.6s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/15) ...
+  Generating static pages using 11 workers (3/15) 
+  Generating static pages using 11 workers (7/15) 
+⨯ useSearchParams() should be wrapped in a suspense boundary at page "/projects". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at S (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\.next\server\chunks\ssr\node_modules_next_0w2y7fz._.js:2:2692)
+    at r (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\.next\server\chunks\ssr\node_modules_next_0w2y7fz._.js:4:6760)
+    at C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\.next\server\chunks\ssr\src_app_projects_page_tsx_090cn8k._.js:1:1637
+    at an (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84267)
+    at ai (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86086)
+    at al (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107860)
+    at ao (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105275)
+    at aa (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84619)
+    at ai (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86135)
+    at ai (C:\Users\RAHIM BASHA\OneDrive\Desktop\chennaihousing.in\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:104615)
+⨯ Next.js build worker exited with code: 1 and signal: null

@@ -8,12 +8,14 @@ import { t, formatPrice } from "@/lib/i18n";
 import PropertyCard from "@/components/ui/PropertyCard";
 import SkeletonCard from "@/components/ui/SkeletonCard";
 
+import { Suspense } from "react";
+
 const LOCATION_CHIPS = [
   "Chennai", "Avadi", "Tambaram", "Porur", "Medavakkam",
   "Sholinganallur", "Perambur", "Ambattur", "Velachery", "OMR",
 ];
 
-export default function ProjectsPage() {
+function ProjectsContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { projects, language, favorites } = useStore();
@@ -454,5 +456,13 @@ export default function ProjectsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProjectsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 py-20 text-center">Loading projects...</div>}>
+      <ProjectsContent />
+    </Suspense>
   );
 }
