@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, Globe } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Menu, X, Phone, Globe, Lock } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { t } from "@/lib/i18n";
 
@@ -10,6 +12,40 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { isMobileMenuOpen, setMobileMenuOpen, language, setLanguage, settings } = useStore();
   const tr = t(language);
+  const router = useRouter();
+  const [imgError, setImgError] = useState(false);
+
+  // Secret Admin Access State
+  const [clickCount, setClickCount] = useState(0);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pin, setPin] = useState("");
+  const [pinError, setPinError] = useState("");
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (clickCount > 0 && clickCount < 10) {
+      timeout = setTimeout(() => setClickCount(0), 5000);
+    }
+    if (clickCount >= 10) {
+      setShowPinModal(true);
+      setClickCount(0);
+    }
+    return () => clearTimeout(timeout);
+  }, [clickCount]);
+
+  const handleAdminAuth = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pin === "2633") {
+      localStorage.setItem("admin_pin", "2633");
+      setShowPinModal(false);
+      setPin("");
+      setPinError("");
+      router.push("/admin");
+    } else {
+      setPinError("Invalid PIN");
+      setPin("");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -36,23 +72,31 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              {settings.logo_url ? (
-                <img
-                  src={settings.logo_url}
-                  alt={settings.site_title || "Logo"}
-                  className="w-10 h-10 rounded-xl object-contain group-hover:scale-105 transition-transform"
-                />
-              ) : (
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform">
-                  {settings.site_title?.substring(0, 2).toUpperCase() || "CH"}
-                </div>
-              )}
+            <div className="flex items-center gap-2 group cursor-pointer" onClick={() => setClickCount(c => c + 1)}>
+              <Link href="/" className="flex items-center gap-2" onClick={(e) => { if (clickCount > 0) e.preventDefault(); }}>
+                {settings.logo_url && !imgError ? (
+                  <div className="relative w-10 h-10 rounded-xl overflow-hidden group-hover:scale-105 transition-transform bg-gray-100 flex-shrink-0">
+                    <Image
+                      src={settings.logo_url}
+                      alt={settings.site_title || "Logo"}
+                      fill
+                      sizes="40px"
+                      className="object-contain"
+                      onError={() => setImgError(true)}
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-primary/30 group-hover:scale-105 transition-transform flex-shrink-0">
+                    {settings.site_title?.substring(0, 2).toUpperCase() || "CH"}
+                  </div>
+                )}
               <div className="hidden sm:block">
                 <h1 className="text-lg font-bold text-gray-900 leading-tight">{settings.site_title || "Chennai Housing"}</h1>
                 <p className="text-[10px] text-gray-500 -mt-0.5 tracking-wide max-w-[150px] truncate uppercase">{settings.tagline || "Premium Plots"}</p>
               </div>
             </Link>
+            </div>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-1">
@@ -138,6 +182,50 @@ export default function Header() {
 
       {/* Spacer for fixed header */}
       <div className="h-16 md:h-20" />
+
+      {/* Secret Admin Modal */}
+      {showPinModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="bg-gray-900 p-6 text-center">
+              <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Lock className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-xl font-bold text-white">Admin Access</h3>
+              <p className="text-gray-400 text-sm mt-1">Enter your security PIN to continue</p>
+            </div>
+            <form onSubmit={handleAdminAuth} className="p-6">
+              <div className="mb-4">
+                <input
+                  type="password"
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                  placeholder="• • • •"
+                  className="w-full text-center text-2xl tracking-[0.5em] font-bold p-3 border border-gray-200 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  maxLength={4}
+                  autoFocus
+                />
+                {pinError && <p className="text-red-500 text-sm text-center mt-2 font-medium">{pinError}</p>}
+              </div>
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowPinModal(false)}
+                  className="flex-1 py-2.5 text-gray-600 font-medium hover:bg-gray-100 rounded-xl transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 bg-primary text-white font-medium hover:bg-primary-dark rounded-xl transition-colors shadow-lg shadow-primary/25"
+                >
+                  Verify
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }

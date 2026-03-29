@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Heart, ArrowRight } from "lucide-react";
 import { Project } from "@/lib/types";
 import { formatPrice } from "@/lib/i18n";
@@ -32,6 +33,8 @@ export default function PropertyCard({ project }: PropertyCardProps) {
     project.image ||
     FALLBACK_IMAGE;
 
+  const [imgSrc, setImgSrc] = useState(imageUrl);
+
   return (
     <Link
       href={`/projects/${project.slug || project.id}`}
@@ -39,14 +42,13 @@ export default function PropertyCard({ project }: PropertyCardProps) {
     >
       {/* Image */}
       <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={imageUrl}
+        <Image
+          src={imgSrc}
           alt={project.title || "Project"}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          onError={(e) => {
-            e.currentTarget.src = FALLBACK_IMAGE;
-          }}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover group-hover:scale-110 transition-transform duration-700"
+          onError={() => setImgSrc(FALLBACK_IMAGE)}
         />
 
         {/* Overlay gradient */}

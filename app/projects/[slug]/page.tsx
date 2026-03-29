@@ -11,6 +11,8 @@ import { useStore } from "@/store/useStore";
 import { formatPrice } from "@/lib/i18n";
 import { LeadForm } from "@/components/leads/LeadForm";
 import PropertyCard from "@/components/ui/PropertyCard";
+import YouTubeEmbed from "@/components/ui/YouTubeEmbed";
+import Image from "next/image";
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
@@ -73,12 +75,13 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             {/* Gallery */}
             <div className="relative rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="relative aspect-[16/9] bg-gray-100">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={(project.images && project.images[currentImage]) || project.image || "/no-image.png"}
                   alt={`${project.title} - Image ${currentImage + 1}`}
-                  className="w-full h-full object-cover"
-                  onError={(e) => { e.currentTarget.src = "/no-image.png"; }}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 66vw"
+                  className="object-cover"
+                  onError={(e) => { e.currentTarget.setAttribute('src', '/no-image.png'); }}
                 />
 
                 {/* Navigation */}
@@ -131,8 +134,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
                         i === currentImage ? "ring-2 ring-primary" : "opacity-60 hover:opacity-100"
                       }`}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={img} alt="" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.src = "/no-image.png"; }} />
+                      <Image 
+                        src={img} 
+                        alt="" 
+                        fill
+                        sizes="80px"
+                        className="object-cover" 
+                        onError={(e) => { e.currentTarget.setAttribute('src', '/no-image.png'); }} 
+                      />
                     </button>
                   ))}
                 </div>
@@ -275,37 +284,12 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ slug: 
             </div>
 
             {/* YouTube Video */}
-            {project.youtube_url && (() => {
-              const getEmbedUrl = (url: string): string => {
-                if (!url) return "";
-                if (url.includes("youtube.com/watch")) {
-                  const videoId = url.split("v=")[1]?.split("&")[0];
-                  return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
-                }
-                if (url.includes("youtu.be/")) {
-                  const videoId = url.split("youtu.be/")[1]?.split("?")[0];
-                  return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
-                }
-                if (url.includes("/embed/")) return url;
-                return url;
-              };
-              const embedUrl = getEmbedUrl(project.youtube_url);
-              if (!embedUrl) return null;
-              return (
+            {project.youtube_url && (
                 <div className="bg-white rounded-2xl shadow-md p-6">
                   <h2 className="text-xl font-bold text-gray-900 mb-4">🎥 Project Video</h2>
-                  <div className="relative aspect-video rounded-xl overflow-hidden">
-                    <iframe
-                      src={embedUrl}
-                      title="Project Video"
-                      className="absolute inset-0 w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
-                  </div>
+                  <YouTubeEmbed url={project.youtube_url} />
                 </div>
-              );
-            })()}
+            )}
 
             {/* Map */}
             <div className="bg-white rounded-2xl shadow-md p-6">

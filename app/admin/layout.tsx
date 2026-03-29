@@ -29,6 +29,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     // Initial session check
     const checkSession = async () => {
+      // Secret Admin Protocol Verify
+      const adminPin = localStorage.getItem("admin_pin");
+      if (adminPin !== "2633") {
+        router.push("/");
+        return;
+      }
+
       const { data: { session } } = await supabase.auth.getSession();
       setAdminLoggedIn(!!session);
       if (!session && pathname !== "/admin/login") {
@@ -39,6 +46,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     // Listen for auth state changes globally
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      const adminPin = localStorage.getItem("admin_pin");
+      if (adminPin !== "2633") {
+        router.push("/");
+        return;
+      }
+
       setAdminLoggedIn(!!session);
       if (!session && pathname !== "/admin/login") {
         router.push("/admin/login");

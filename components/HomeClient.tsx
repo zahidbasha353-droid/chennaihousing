@@ -6,16 +6,25 @@ import { useRouter } from "next/navigation";
 import { Search, Shield, FileCheck, Landmark, Scale, Star, ChevronRight, Phone, MapPin, ArrowRight } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { t, formatPrice } from "@/lib/i18n";
-import { TESTIMONIALS } from "@/lib/data";
+import { TESTIMONIALS, DEMO_PROJECTS } from "@/lib/data";
 import PropertyCard from "@/components/ui/PropertyCard";
 import { CallbackWidget } from "@/components/leads/CallbackWidget";
+import Image from "next/image";
 
 export default function HomeClient() {
   const { projects, language, settings } = useStore();
   const tr = t(language);
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const featuredProjects = projects.filter((p) => p.featured);
+  
+  // Guarantee at least 6 products
+  let featuredProjects = projects.filter((p) => p.featured);
+  if (featuredProjects.length < 6) {
+    const fallbackProjects = DEMO_PROJECTS.filter(p => !featuredProjects.find(fp => fp.id === p.id));
+    featuredProjects = [...featuredProjects, ...fallbackProjects].slice(0, 6);
+  } else {
+    featuredProjects = featuredProjects.slice(0, 6);
+  }
 
   return (
     <div>
@@ -23,12 +32,14 @@ export default function HomeClient() {
       <section className="relative min-h-[600px] md:min-h-[700px] flex items-center">
         {/* Background */}
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={settings.hero_image || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&h=900&fit=crop"}
             alt="Premium residential plots"
-            className="w-full h-full object-cover"
-            onError={(e) => { e.currentTarget.src = "/no-image.png"; }}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            onError={(e) => { e.currentTarget.setAttribute('src', '/no-image.png'); }}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
         </div>
@@ -134,7 +145,7 @@ export default function HomeClient() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {featuredProjects.slice(0, 6).map((project, i) => (
+            {featuredProjects.map((project, i) => (
               <div key={project.id} className="animate-slideUp" style={{ animationDelay: `${i * 100}ms` }}>
                 <PropertyCard project={project} />
               </div>
