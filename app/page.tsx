@@ -1,3 +1,4 @@
+import HomeClient from "@/components/HomeClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,9 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return (
-    <div>
-      <h1>Website Working 🔥</h1>
-    </div>
-  );
+  return <HomeClient />;
 }
